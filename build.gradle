@@ -88,7 +88,7 @@ task deploy(dependsOn: ':build') << {
     }
     ssh.run{
         session(remotes.roborioAdmin) {
-            put from: fileTree(dir: gradle.wpilibLibDir), into: '/usr/local/frc/lib'
+            // put from: fileTree(dir: gradle.wpilibLibDir), into: '/usr/local/frc/lib'
             execute "killall -q netconsole-host || :"
             put from: "${gradle.wpilibAntDir}/netconsole-host", into: '/usr/local/frc/bin'
             execute "chmod a+x /usr/local/frc/bin/netconsole-host"
