@@ -4,6 +4,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4373.robot.RobotMap;
 import org.usfirst.frc.team4373.robot.commands.teleop.MecanumDriveCommand;
 
 /**
@@ -11,6 +12,7 @@ import org.usfirst.frc.team4373.robot.commands.teleop.MecanumDriveCommand;
  */
 
 public class MecanumDrive extends Subsystem {
+
     private CANTalon frontLeftTalon;
     private CANTalon rearLeftTalon;
     private CANTalon frontRightTalon;
@@ -20,6 +22,13 @@ public class MecanumDrive extends Subsystem {
 
     public static MecanumDrive getInstance() {
         return mecanumDrive == null ? mecanumDrive = new MecanumDrive() : mecanumDrive;
+    }
+
+    private MecanumDrive() {
+        this.frontLeftTalon = new CANTalon(RobotMap.LEFT_DRIVE_MOTOR_1);
+        this.rearLeftTalon = new CANTalon(RobotMap.LEFT_DRIVE_MOTOR_2);
+        this.frontRightTalon = new CANTalon(RobotMap.RIGHT_DRIVE_MOTOR_1);
+        this.rearRightTalon = new CANTalon(RobotMap.RIGHT_DRIVE_MOTOR_2);
     }
 
     /**
@@ -40,14 +49,14 @@ public class MecanumDrive extends Subsystem {
         xIn = rotated[0];
         yIn = rotated[1];
 
-        double frontDamp = SmartDashboard.getNumber("Front Damp", 0);
-        double rearDamp = SmartDashboard.getNumber("Rear Damp", 0);
+        double frontDamp = SmartDashboard.getNumber("Front Damp", 1);
+        double rearDamp = SmartDashboard.getNumber("Rear Damp", 1);
 
         double[] wheelSpeeds = new double[4];
-        wheelSpeeds[RobotDrive.MotorType.kFrontLeft.value] = xIn + yIn + rotation - frontDamp;
-        wheelSpeeds[RobotDrive.MotorType.kFrontRight.value] = -xIn + yIn - rotation - frontDamp;
-        wheelSpeeds[RobotDrive.MotorType.kRearLeft.value] = -xIn + yIn + rotation - rearDamp;
-        wheelSpeeds[RobotDrive.MotorType.kRearRight.value] = xIn + yIn - rotation - rearDamp;
+        wheelSpeeds[RobotDrive.MotorType.kFrontLeft.value] = -(xIn + yIn + rotation * frontDamp);
+        wheelSpeeds[RobotDrive.MotorType.kFrontRight.value] = -xIn + yIn - rotation * frontDamp;
+        wheelSpeeds[RobotDrive.MotorType.kRearLeft.value] = -xIn + yIn + rotation * rearDamp;
+        wheelSpeeds[RobotDrive.MotorType.kRearRight.value] = -(xIn + yIn - rotation * rearDamp);
 
         normalize(wheelSpeeds);
         frontLeftTalon.set(wheelSpeeds[RobotDrive.MotorType.kFrontLeft.value]);
@@ -82,6 +91,6 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new MecanumDriveCommand());
+        setDefaultCommand(MecanumDriveCommand.getInstance());
     }
 }

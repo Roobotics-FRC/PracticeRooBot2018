@@ -79,7 +79,7 @@ task deploy(dependsOn: ':build') << {
         network = res.substring(23)
         curNetProc.waitFor()
         if (network != '4373_') {
-            Process setProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 4373_ robotics')
+            Process setProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 robotics')
             setProc.waitFor()
         }
     }

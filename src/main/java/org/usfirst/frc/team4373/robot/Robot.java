@@ -17,8 +17,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         SmartDashboard.putBoolean("Running", true);
-        SmartDashboard.putNumber("Forward Damp", 0);
-        SmartDashboard.putNumber("Rear Damp", 0);
+        SmartDashboard.putNumber("Forward Damp", 1);
+        SmartDashboard.putNumber("Rear Damp", 1);
         // this.drive = new RobotDrive(RobotMap.LEFT_DRIVE_MOTOR_1, RobotMap.LEFT_DRIVE_MOTOR_2,
         //         RobotMap.RIGHT_DRIVE_MOTOR_1, RobotMap.RIGHT_DRIVE_MOTOR_2);
         MecanumDrive.getInstance();
