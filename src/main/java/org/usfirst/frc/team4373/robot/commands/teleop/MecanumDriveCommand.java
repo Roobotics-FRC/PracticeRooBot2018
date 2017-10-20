@@ -11,13 +11,7 @@ import org.usfirst.frc.team4373.robot.subsystems.MecanumDrive;
 public class MecanumDriveCommand extends Command {
     private MecanumDrive drive;
 
-    private static MecanumDriveCommand driveCommand = null;
-
-    public static MecanumDriveCommand getInstance() {
-        return driveCommand == null ? new MecanumDriveCommand() : driveCommand;
-    }
-
-    private MecanumDriveCommand() {
+    public MecanumDriveCommand() {
         this.drive = MecanumDrive.getInstance();
         requires(this.drive);
     }

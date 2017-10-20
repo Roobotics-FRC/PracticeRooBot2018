@@ -91,6 +91,6 @@ public class MecanumDrive extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(MecanumDriveCommand.getInstance());
+        setDefaultCommand(new MecanumDriveCommand());
     }
 }
