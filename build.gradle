@@ -46,11 +46,11 @@ checkstyle {
 remotes {
     roborioStandard {
         role 'masterNode'
-        host = 'roborio-4373-frc.local'
+        host = '10.43.73.73'
         user = 'lvuser'
     }
     roborioAdmin {
-        host = 'roborio-4373-frc.local'
+        host = '10.43.73.73'
         user = 'admin'
     }
 }

@@ -18,7 +18,6 @@ public class MecanumDriveCommand extends Command {
 
     @Override
     protected void initialize() {
-
     }
 
     @Override
@@ -36,11 +35,11 @@ public class MecanumDriveCommand extends Command {
 
     @Override
     protected void end() {
-
+        this.drive.mecanumDrive_Cartesian(0,0, 0, 0);
     }
 
     @Override
     protected void interrupted() {
-
+        end();
     }
 }
