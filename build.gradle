@@ -92,7 +92,7 @@ task deploy(dependsOn: ':build') << {
             execute "killall -q netconsole-host || :"
             put from: "${gradle.wpilibAntDir}/netconsole-host", into: '/usr/local/frc/bin'
             execute "chmod a+x /usr/local/frc/bin/netconsole-host"
-        }4373_
+        }
     }
     ssh.run {
         session(remotes.roborioStandard) {
